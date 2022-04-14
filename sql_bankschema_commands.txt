@@ -1,4 +1,4 @@
-create table loan_details (customer_number varchar(6),branch_id varchar(6),loan_amount int(7), primary key (loan_amount));
+create table loan_details (customer_number varchar(6),branch_id varchar(6),loan_amount int(7), primary key (customer_number,branch_id));
 
 create table branch_master (branch_name varchar(30),branch_id varchar(6),branch_city varchar(30), primary key (branch_id));
 
