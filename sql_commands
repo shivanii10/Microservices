@@ -86,7 +86,7 @@ the records sorted in ascending order based on transaction type.
 select count(*) Trans_Count , tm.transaction_type from transaction_details tm 
 join
 account_master am on am.account_number=tm.account_number 
-where am.customer_number like "%001" group by transaction_type order by transaction_type ;
+where am.customer_number like "%001" group by tm.transaction_type order by tm.transaction_type ;
 
 
 4.Write a query to display the firstname of the customers who have more than 1 account. Display the
