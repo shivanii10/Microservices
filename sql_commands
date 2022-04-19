@@ -73,9 +73,7 @@ where am.account_status='terminated';
 2.Write a query to display the number of customers who have registration but no account in the
 bank. Give the alias name as Count_Customer for number of customers.
 
-select count(cm.customer_number) from customer_master cm join account_master am 
-where 
-am.customer_number!=cm.customer_number ;        INCORRECT
+select count(*) Count_customer from customer_master where customer_number NOT IN (select customer_number from account_master); 
 
 
 
