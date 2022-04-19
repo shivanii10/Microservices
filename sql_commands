@@ -6,3 +6,52 @@ select job, min(avg(sal)) from emp group by job having avg(sal) in (select avg(s
 
 --------------------------------------------------------------------------------------------------------------
 
+mysql> select avg(sal) from emp group by job;
++-----------+
+| avg(sal)  |
++-----------+
+| 1037.5000 |
+| 1400.0000 |
+| 2758.3333 |
+| 3000.0000 |
+| 5000.0000 |
++-----------+
+
+mysql> select job,avg(sal) from emp group by job  having avg(sal) in (select avg(sal) from emp group by job);
++-----------+-----------+
+| job       | avg(sal)  |
++-----------+-----------+
+| CLERK     | 1037.5000 |
+| SALESMAN  | 1400.0000 |
+| ANALYST   | 3000.0000 |
+| PRESIDENT | 5000.0000 |
++-----------+-----------+
+
+mysql> select job, avg(sal) from emp group by job;
++-----------+-----------+
+| job       | avg(sal)  |
++-----------+-----------+
+| CLERK     | 1037.5000 |
+| SALESMAN  | 1400.0000 |
+| MANAGER   | 2758.3333 |
+| ANALYST   | 3000.0000 |
+| PRESIDENT | 5000.0000 |
++-----------+-----------+
+
+mysql> select job, avg(sal) from emp group by job having avg(sal) in (select avg(sal) from emp group by job) order by avg(sal);
++-----------+-----------+
+| job       | avg(sal)  |
++-----------+-----------+
+| CLERK     | 1037.5000 |
+| SALESMAN  | 1400.0000 |
+| ANALYST   | 3000.0000 |
+| PRESIDENT | 5000.0000 |
++-----------+-----------+
+
+mysql> select job, avg(sal) from emp group by job having avg(sal) in (select avg(sal) from emp group by job) order by avg(sal) limit 1;
++-------+-----------+
+| job   | avg(sal)  |
++-------+-----------+
+| CLERK | 1037.5000 |
++-------+-----------+
+
