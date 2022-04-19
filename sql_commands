@@ -55,3 +55,46 @@ mysql> select job, avg(sal) from emp group by job having avg(sal) in (select avg
 | CLERK | 1037.5000 |
 +-------+-----------+
 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+select cm.firstname,am.account_number from customer_master cm join account_master am on am.customer_number=cm.customer_number where day(am.account_opening_date)>'15';
+
+1.Write a query to display customer number, customer's first name, account number where the
+account status is terminated. Display the records sorted in ascending order based on customer
+number and then by account number.
+
+select cm.firstname,am.account_number,cm.customer_number from customer_master cm 
+join
+account_master am on am.customer_number=cm.customer_number 
+where am.account_status='terminated';
+
+
+
+2.Write a query to display the number of customers who have registration but no account in the
+bank. Give the alias name as Count_Customer for number of customers.
+
+select count(cm.customer_number) from customer_master cm join account_master am 
+where 
+am.customer_number!=cm.customer_number ;        INCORRECT
+
+
+
+3.Write a query to display the total number of withdrawals and total number of deposits being done
+by customer whose customer number ends with 001. The query should display transaction type and
+the number of transactions. Give an alias name as Trans_Count for number of transactions. Display
+the records sorted in ascending order based on transaction type.
+
+
+select count(*) Trans_Count , tm.transaction_type from transaction_details tm 
+join
+account_master am on am.account_number=tm.account_number 
+where am.customer_number like "%001" group by transaction_type order by transaction_type ;
+
+
+4.Write a query to display the firstname of the customers who have more than 1 account. Display the
+records in sorted order based on firstname.
+
+select cm.firstname from customer_master cm 
+join 
+account_master am on am.customer_number=cm.customer_number 
+having count(am.customer_number)>1;
