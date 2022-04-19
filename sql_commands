@@ -94,7 +94,8 @@ where am.customer_number like "%001" group by transaction_type order by transact
 4.Write a query to display the firstname of the customers who have more than 1 account. Display the
 records in sorted order based on firstname.
 
-select cm.firstname from customer_master cm 
+select count(cm.customer_number),cm.firstname,cm.customer_number from customer_master cm 
 join 
 account_master am on am.customer_number=cm.customer_number 
-having count(am.customer_number)>1;
+group by cm.customer_number 
+having count(cm.customer_number)>1 order by cm.firstname;
