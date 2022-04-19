@@ -2,3 +2,7 @@ select job, avg(sal) from emp group by job having avg(sal) in
 -> (select avg(sal) from emp group by job);
 
 select job, min(avg(sal)) from emp group by job having avg(sal) in (select avg(sal) from job group by job);
+
+
+--------------------------------------------------------------------------------------------------------------
+
